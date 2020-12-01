@@ -157,10 +157,10 @@ MonoBehaviour:
       LocationInputType: 0
       LocationData: {fileID: 0}
       Location:
-        Latitude: 0
-        Longitude: 0
+        Latitude: 37.546338987997814
+        Longitude: 126.88046662965125
         Altitude: 0
-        AltitudeMode: 0
+        AltitudeMode: 1
         Label: 
       OverrideAltitudeData:
         OverrideAltitude: 0
