@@ -18,6 +18,7 @@ public class Draw : MonoBehaviour
     public Color lineColor=Color.white;
     GameObject colorSelection;
     public Image[] buttonColors=new Image[8];
+    public bool isDrawingButtonTouched = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +41,7 @@ public class Draw : MonoBehaviour
         //    print(go.name);
         //}
 
-        if (Input.touchCount > 0&& !EventSystem.current.currentSelectedGameObject)
+        if (isDrawingButtonTouched&&Input.touchCount > 0&& !EventSystem.current.currentSelectedGameObject)
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
@@ -90,6 +91,8 @@ public class Draw : MonoBehaviour
                 {
                     StartCoroutine(Show(buttonColors[i]));
                 }
+
+                isDrawingButtonTouched = false;
             }
 
 

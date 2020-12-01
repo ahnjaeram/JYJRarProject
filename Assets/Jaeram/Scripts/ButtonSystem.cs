@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonSystem : MonoBehaviour
 {
     Draw draw;
+    GameObject drawingButton;
     void Start()
     {
         draw = GameObject.Find("Draw").GetComponent<Draw>();
+        drawingButton = GameObject.Find("DrawingButton");
     }
 
     // Update is called once per frame
@@ -42,5 +45,14 @@ public class ButtonSystem : MonoBehaviour
     public void SetColorPurple()
     {
         draw.lineColor = new Color(0.5f, 0, 1);
+    }
+
+    public void SetButtonBoolTrue()
+    {
+        draw.isDrawingButtonTouched = true;
+    }
+    public void SetDrawButtonColor()
+    {
+        drawingButton.GetComponent<Image>().color = draw.lineColor;
     }
 }
