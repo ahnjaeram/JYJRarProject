@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class ButtonSystem : MonoBehaviour
 {
+    IconMaker iconMaker;
+    PhotoMaker photoMaker;
     Draw draw;
     GameObject drawingButton;
     void Start()
     {
         draw = GameObject.Find("Draw").GetComponent<Draw>();
         drawingButton = GameObject.Find("DrawingButton");
+        iconMaker = GameObject.Find("Holder").GetComponent<IconMaker>();
+        photoMaker = GameObject.Find("Holder").GetComponent<PhotoMaker>();
     }
 
     // Update is called once per frame
@@ -54,5 +58,13 @@ public class ButtonSystem : MonoBehaviour
     public void SetDrawButtonColor()
     {
         drawingButton.GetComponent<Image>().color = draw.lineColor;
+    }
+    public void MakeIcon()
+    {
+        iconMaker.create = true;
+    }
+    public void MakePhoto()
+    {
+        photoMaker.TakeScreenShot();
     }
 }
