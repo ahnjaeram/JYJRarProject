@@ -9,12 +9,14 @@ public class ButtonSystem : MonoBehaviour
     PhotoMaker photoMaker;
     Draw draw;
     GameObject drawingButton;
+    //Text pathText;
     void Start()
     {
         draw = GameObject.Find("Draw").GetComponent<Draw>();
         drawingButton = GameObject.Find("DrawingButton");
         iconMaker = GameObject.Find("Holder").GetComponent<IconMaker>();
         photoMaker = GameObject.Find("Holder").GetComponent<PhotoMaker>();
+        //pathText = GameObject.Find("PathText").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -61,7 +63,8 @@ public class ButtonSystem : MonoBehaviour
     }
     public void MakeIcon()
     {
-        iconMaker.create = true;
+        iconMaker.CreateIcon();
+        //pathText.text = iconMaker.path;
     }
     public void MakePhoto()
     {

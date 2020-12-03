@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Text;
+using System.IO;
+using System;
 
 public class Draw : MonoBehaviour
 {
@@ -34,14 +37,15 @@ public class Draw : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //클릭 할때마다 새로운 라인 렌더러를 만든다
-        //GameObject go = EventSystem.current.currentSelectedGameObject;
-        //if (go != null)
-        //{
-        //    print(go.name);
-        //}
+        
+        DrawLine();
+       
+     
+    }
 
-        if (isDrawingButtonTouched&&Input.touchCount > 0&& !EventSystem.current.currentSelectedGameObject)
+    private void DrawLine()
+    {
+        if (isDrawingButtonTouched && Input.touchCount > 0 && !EventSystem.current.currentSelectedGameObject)
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
@@ -59,17 +63,17 @@ public class Draw : MonoBehaviour
                 lr.numCornerVertices = 5;
                 lr.numCapVertices = 5;
 
-                for(int i = 0; i < buttonColors.Length; i++)
+                for (int i = 0; i < buttonColors.Length; i++)
                 {
                     StartCoroutine(Hide(buttonColors[i]));
                 }
 
-                
-                
-            }
-        //움직임에 따라 라인이 그려진다
 
-            if (Input.GetTouch(0).phase == TouchPhase.Moved|| Input.GetTouch(0).phase == TouchPhase.Stationary)
+
+            }
+            //움직임에 따라 라인이 그려진다
+
+            if (Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
             {
                 Touch touch = Input.GetTouch(0);
                 verticePos = new Vector3(touch.position.x, touch.position.y, 0);
@@ -97,8 +101,8 @@ public class Draw : MonoBehaviour
 
 
         }
-     
     }
+
     public float hideShowTime=0.5f;
     
     
