@@ -84,7 +84,11 @@ public class DrawTest : MonoBehaviour
         {
             print(lineNumb);
             Save();
-            
+            if (verticeIdx != 0)
+            {
+                verticeIdx = 0;
+                lineNumb++;
+            }
         }
     }
 
@@ -115,11 +119,11 @@ public class DrawTest : MonoBehaviour
             string[] rowDataTemp = new string[5];
             rowDataTemp[0] = "Line" + i; // 이름
             rowDataTemp[1] = lr.material.color.r.ToString() + lr.material.color.g.ToString() + lr.material.color.b.ToString(); // 색깔
-            rowDataTemp[2] =lineDrawer.transform.position.x.ToString() + lineDrawer.transform.position.y.ToString() +lineDrawer.transform.position.z.ToString();//라인 드로워 위치
+            rowDataTemp[2] = lineDrawer.transform.position.x.ToString() + lineDrawer.transform.position.y.ToString() + lineDrawer.transform.position.z.ToString();//라인 드로워 위치
             rowDataTemp[3] = (verticeIdx + 1).ToString();//정점 갯수
-            for(int j = 0; j < verticeIdx; j++)
+            for(int j = 0; j < verticeIdx + 1; j++)
             {
-                rowDataTemp[4] += "/" + Math.Truncate(lineVertices[verticeIdx].x*10000).ToString()+"/" + Math.Truncate(lineVertices[verticeIdx].y*10000).ToString() + "/" + Math.Truncate(lineVertices[verticeIdx].z*10000).ToString()+"&";
+                rowDataTemp[4] += lineVertices[verticeIdx].x.ToString() + lineVertices[verticeIdx].y.ToString()+ lineVertices[verticeIdx].z.ToString();
             }
             rowData.Add(rowDataTemp);
         }
@@ -150,19 +154,13 @@ public class DrawTest : MonoBehaviour
         {
             forTheFirstTime = false;
         }
-
-        if (verticeIdx != 0)
-        {
-            verticeIdx = 0;
-            lineNumb++;
-        }
     }
 
     // Following method is used to retrive the relative path as device platform
     private string getPath()
     {
 #if UNITY_EDITOR
-        return Application.streamingAssetsPath + "/CSV/" + "Saved_data.csv";
+        return Application.dataPath + "/CSV/" + "Saved_data.csv";
 #elif UNITY_ANDROID
         return Application.persistentDataPath+"Saved_data.csv";
 #elif UNITY_IPHONE
