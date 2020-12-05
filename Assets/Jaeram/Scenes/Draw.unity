@@ -1179,12 +1179,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735126418}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cee8c6789b1de240a393f47b39c800a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Graffities: {fileID: 2073031787}
+  graffitiNum: 0
   makePrefab: 0
 --- !u!1 &770465383
 GameObject:
