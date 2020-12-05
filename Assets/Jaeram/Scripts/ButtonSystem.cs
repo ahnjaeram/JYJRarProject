@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ButtonSystem : MonoBehaviour
 {
     IconMaker iconMaker;
-    PhotoMaker photoMaker;
+    ScreenShotMaker photoMaker;
     Draw draw;
     GameObject drawingButton;
     //Text pathText;
@@ -15,7 +15,7 @@ public class ButtonSystem : MonoBehaviour
         draw = GameObject.Find("Draw").GetComponent<Draw>();
         drawingButton = GameObject.Find("DrawingButton");
         iconMaker = GameObject.Find("Holder").GetComponent<IconMaker>();
-        photoMaker = GameObject.Find("Holder").GetComponent<PhotoMaker>();
+        photoMaker = GameObject.Find("Holder").GetComponent<ScreenShotMaker>();
         //pathText = GameObject.Find("PathText").GetComponent<Text>();
     }
 
@@ -68,6 +68,6 @@ public class ButtonSystem : MonoBehaviour
     }
     public void MakePhoto()
     {
-        photoMaker.TakeScreenShot();
+        photoMaker.CreateScreenShot();
     }
 }
