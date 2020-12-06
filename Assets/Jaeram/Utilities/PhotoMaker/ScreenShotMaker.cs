@@ -116,6 +116,34 @@ public class ScreenShotMaker : MonoBehaviour
         StartCoroutine(WaitToCapture());
         
     }
+
+
+    public void ScreenShot2()
+    {
+        if (canvas.activeSelf)
+        {
+            print("11");
+            canvas.SetActive(false);
+            print("22");
+        }
+        bakeCam.targetTexture = ren;
+
+       // RenderTexture currentRT = RenderTexture.active;
+        bakeCam.targetTexture.Release();
+        RenderTexture.active = bakeCam.targetTexture;
+        bakeCam.Render();
+        
+        Texture2D impJpg = new Texture2D(bakeCam.targetTexture.width, bakeCam.targetTexture.height, TextureFormat.ARGB32, false);
+        //impJpg.ReadPixels(new Rect(0, 0, bakeCam.targetTexture.height, bakeCam.targetTexture.width), 0, 0);
+        impJpg.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        impJpg.Apply();
+        byte[] imageBytes = impJpg.EncodeToJPG();
+
+        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(imageBytes, "GalleryTest", "Image.jpg", (success, path) => Debug.Log("Media save result: " + success + " " + path));
+
+
+        StartCoroutine(WaitToCapture());
+    }
     float currentTime=0;
     float setTime = 1;
     IEnumerator WaitToCapture()
@@ -130,7 +158,8 @@ public class ScreenShotMaker : MonoBehaviour
         if (!canvas.activeSelf)
         {
             canvas.SetActive(true);
-
+            currentTime = 0;
+            bakeCam.targetTexture = null;
         }
     }
 }

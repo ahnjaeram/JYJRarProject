@@ -9,6 +9,7 @@ public class ButtonSystem : MonoBehaviour
     ScreenShotMaker photoMaker;
     Draw draw;
     GameObject drawingButton;
+    public Material drawMat;
     //Text pathText;
     void Start()
     {
@@ -63,11 +64,75 @@ public class ButtonSystem : MonoBehaviour
     }
     public void MakeIcon()
     {
-        iconMaker.CreateIcon();
+        // iconMaker.CreateIcon();
+        iconMaker.CreateIcon2();
         //pathText.text = iconMaker.path;
     }
     public void MakePhoto()
     {
         photoMaker.CreateScreenShot();
+    }
+
+    public void PickImage(int maxSize)
+    {
+        NativeGallery.Permission permission = NativeGallery.GetImageFromGallery((path) =>
+        {
+            Debug.Log("Image path: " + path);
+            if (path != null)
+            {
+                // Create Texture from selected image
+                Texture2D texture = NativeGallery.LoadImageAtPath(path, maxSize);
+                if (texture == null)
+                {
+                    Debug.Log("Couldn't load texture from " + path);
+                    return;
+                }
+
+                //Sprite sprite = LoadNewSprite(texture);
+
+                // Assign texture to a temporary quad and destroy it after 5 seconds
+                GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                quad.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2.5f;
+                quad.transform.forward = Camera.main.transform.forward;
+                //quad.transform.localScale = new Vector3(1f, (float)texture.height / (float)texture.width, 1f);
+                quad.transform.localScale = new Vector3(3f, (float)texture.height / (float)texture.width, 1f);
+
+                //Material newMat = new Material(Shader.Find("Standard"));
+                
+
+                //Material material = quad.GetComponent<Renderer>().material;
+
+
+                //if (!material.shader.isSupported) // happens when Standard shader is not included in the build
+                //    material.shader = Shader.Find("Diffuse");
+
+                quad.GetComponent<Renderer>().material = drawMat;
+
+                //quad.GetComponent<Renderer>().material.mainTexture = texture;
+                quad.GetComponent<Renderer>().material.SetTexture("_MainTex", texture);
+                Destroy(quad, 5f);
+
+                // If a procedural texture is not destroyed manually, 
+                // it will only be freed after a scene change
+                Destroy(texture, 5f);
+            }
+        }, "Select a PNG image", "image/png");
+
+        Debug.Log("Permission result: " + permission);
+
+        
+    }
+
+    private Sprite LoadNewSprite(Texture2D texture, float PixelsPerUnit = 100.0f)
+    {
+
+        // Load a PNG or JPG image from disk to a Texture2D, assign this texture to a new sprite and return its reference
+
+        Sprite NewSprite;// = new Sprite();
+        
+
+        NewSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), PixelsPerUnit);
+
+        return NewSprite;
     }
 }

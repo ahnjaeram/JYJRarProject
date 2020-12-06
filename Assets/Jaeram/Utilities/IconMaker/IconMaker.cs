@@ -104,5 +104,22 @@ public class IconMaker : MonoBehaviour
         
         return saveLocation;
     }
+
+    public void CreateIcon2()
+    {
+        bakeCam.targetTexture = ren;
+
+       
+        bakeCam.targetTexture.Release();
+        RenderTexture.active = bakeCam.targetTexture;
+        bakeCam.Render();
+
+        Texture2D impPng = new Texture2D(bakeCam.targetTexture.width, bakeCam.targetTexture.height, TextureFormat.ARGB32, false);
+        //impPng.ReadPixels(new Rect(0, 0, bakeCam.targetTexture.height, bakeCam.targetTexture.width), 0, 0);
+        impPng.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        impPng.Apply();
+
+        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(impPng, "GalleryTest", "Image.png", (success, path) => Debug.Log("Media save result: " + success + " " + path));
+    }
 }
 
