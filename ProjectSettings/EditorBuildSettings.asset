@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Jiyoon/Scenes/JY_GPSScene.unity
-    guid: 50c1dbc9376c06f40953af7c67d45d62
+    path: Assets/Jiyoon/Scenes/JY_Map2.unity
+    guid: 45b874017ded4714083c3e4746a92812
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9ed0b6ce177d7c448a239ae450041506, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 9bc2d099f46da4144b0ba7ea3b07b6d8, type: 2}

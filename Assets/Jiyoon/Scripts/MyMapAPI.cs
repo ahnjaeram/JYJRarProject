@@ -7,20 +7,24 @@ using UnityEngine.Networking;
 public class MyMapAPI : MonoBehaviour
 {
     public GameObject mapObject;
-    public string API_id;
-    public string API_pass;
-    public Slider levelSlider;
-
+    //public string API_id;
+    //public string API_pass;
+    //public Slider levelSlider;
+    
     RawImage mapImage;
     RectTransform rt;
     MyGPS mGPS;
+
+    public float zoom = 12;
+    public string googleAPI;
 
     void Start()
     {
         mGPS = GetComponent<MyGPS>();
         mapImage = mapObject.GetComponent<RawImage>();
         rt = mapObject.GetComponent<RectTransform>();
-        levelSlider.onValueChanged.AddListener((num) => { ShowMap(); });
+        //levelSlider.onValueChanged.AddListener((num) => { ShowMap(); });
+        ShowMap();
     }
 
     public void ShowMap()
@@ -32,15 +36,20 @@ public class MyMapAPI : MonoBehaviour
     IEnumerator MapOn()
     {
         // 원하는 지도 데이터를 요청하기 위한 URL을 생성한다.
-        string url = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?"
-                    + "w=" + rt.rect.width + "&h=" + rt.rect.height
-                    + "&center=" + mGPS.longitude + "," + mGPS.latitude
-                    + "&markers=size:mid|pos:" + mGPS.longitude + "%20" + mGPS.latitude + "|viewSizeRatio:2.0"
-                    //+ "&center=" + 126.8823f + "," + 37.4808f
-                    //+ "&markers=size:tiny|pos:" + 126.8823f + "%20" + 37.4808f
-                    + "&level=" + (int)levelSlider.value
-                    + "&X-NCP-APIGW-API-KEY-ID=" + API_id
-                    + "&X-NCP-APIGW-API-KEY=" + API_pass;
+        //선생님: 네이버
+        //string url = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?"
+        //            + "w=" + rt.rect.width + "&h=" + rt.rect.height
+        //            + "&center=" + mGPS.longitude + "," + mGPS.latitude
+        //            + "&markers=size:mid|pos:" + mGPS.longitude + "%20" + mGPS.latitude + "|viewSizeRatio:2.0"
+        //            //+ "&center=" + 126.8823f + "," + 37.4808f
+        //            //+ "&markers=size:tiny|pos:" + 126.8823f + "%20" + 37.4808f
+        //            + "&level=" + (int)levelSlider.value
+        //            + "&X-NCP-APIGW-API-KEY-ID=" + API_id
+        //            + "&X-NCP-APIGW-API-KEY=" + API_pass;
+        //JYJR: 구글
+        string url = "https://maps.googleapis.com/maps/api/staticmap?"
+            + "center=" + mGPS.latitude.ToString() + "," + mGPS.longitude.ToString() + "&zoom=" + zoom + "&size=" + rt.rect.width + "x" + rt.rect.height
+            + "&scale=2" + "&key=" + googleAPI;
 
         // URL 주소로부터 이미지 데이터를 요청(대기)한다.
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
@@ -53,7 +62,7 @@ public class MyMapAPI : MonoBehaviour
         }
 
         // 받은 이미지를 UI에 출력한다.
-        mapObject.SetActive(true);
+        //mapObject.SetActive(true);
         mapImage.texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
     }
 
