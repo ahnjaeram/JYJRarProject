@@ -117,7 +117,8 @@ namespace ARLocation
                 }
                 else
                 {
-                    location = LocationInput.Location.Clone();
+                    //location = LocationInput.Location.Clone();
+                    location = new Location();
                 }
 
                 return location;
@@ -228,7 +229,8 @@ namespace ARLocation
             locationProvider = ARLocationProvider.Instance;
             arLocationManager = ARLocationManager.Instance;
             arLocationRoot = arLocationManager.gameObject.transform;
-            mainCameraTransform = arLocationManager.MainCamera.transform;
+            //mainCameraTransform = arLocationManager.MainCamera.transform;
+            mainCameraTransform = arLocationManager.Camera.transform;
 
             if (locationProvider == null)
             {
@@ -236,7 +238,8 @@ namespace ARLocation
                 return;
             }
 
-            Initialize();
+            //Initialize();
+            StartCoroutine(PreInit());
 
             hasInitialized = true;
         }
@@ -249,12 +252,24 @@ namespace ARLocation
 
             state = new StateData();
             Initialize();
+            //StartCoroutine(PreInit());
 
             if (locationProvider.IsEnabled)
             {
                 locationUpdatedHandler(locationProvider.CurrentLocation, locationProvider.LastLocation);
             }
         }
+        
+        System.Collections.IEnumerator PreInit()
+        {
+            while(LoadLine._instance == null || LoadLine._instance.isLineDataReady == false)
+            {
+                yield return null;
+            }
+
+            Initialize();
+        }
+
 
         void Initialize()
         {

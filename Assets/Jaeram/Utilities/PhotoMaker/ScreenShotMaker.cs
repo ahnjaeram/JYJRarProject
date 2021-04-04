@@ -22,7 +22,7 @@ public class ScreenShotMaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pathText = GameObject.Find("ScreenShotPathText").GetComponent<Text>();
+        //pathText = GameObject.Find("ScreenShotPathText").GetComponent<Text>();
         
         //canvas = GameObject.Find("Canvas");
         

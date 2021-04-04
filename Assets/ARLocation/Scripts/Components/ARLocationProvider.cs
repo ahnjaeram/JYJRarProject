@@ -65,7 +65,8 @@ namespace ARLocation
         /// <summary>
         /// If true, the location provider has received the first location data.
         /// </summary>
-        public bool IsEnabled => Provider.IsEnabled;
+        //public bool IsEnabled => Provider.IsEnabled;
+        public bool IsEnabled => false;
 
         /// <summary>
         /// If true, the location provider has started, but no location data has been read.

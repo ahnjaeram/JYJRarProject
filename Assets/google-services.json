@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "358700526037",
+    "firebase_url": "https://jyjrarproject-default-rtdb.firebaseio.com",
+    "project_id": "jyjrarproject",
+    "storage_bucket": "jyjrarproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358700526037:android:8ed3cfdec8ec1302d8355c",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.JYJRarProject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358700526037-h1vsgq9mbkg5rnho2s5vpnihurbddn8c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMoNh5n3mQeGtDYRKyGG8IaNt_iOQ0t2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358700526037-h1vsgq9mbkg5rnho2s5vpnihurbddn8c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

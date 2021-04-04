@@ -78,6 +78,7 @@ public class DrawTest : MonoBehaviour
             lineVertices[verticeIdx] = verticePos;
             lr.positionCount = verticeIdx + 1;
             lr.SetPosition(verticeIdx, verticePos);
+            
             verticeIdx++;
         }
         else if (Input.GetMouseButtonUp(0))

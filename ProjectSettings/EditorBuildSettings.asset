@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Jiyoon/Scenes/JY_Map2.unity
+    path: Assets/Jiyoon/Scenes/JY_Open.unity
+    guid: 03ea9d3409fd1c44dbbacb4267ddae1e
+  - enabled: 1
+    path: Assets/Jiyoon/Scenes/LogIn_JYCopy.unity
+    guid: ef5cf3219d9e95340984cef0783f6bd5
+  - enabled: 1
+    path: Assets/Jiyoon/Scenes/JY_View.unity
+    guid: 50c1dbc9376c06f40953af7c67d45d62
+  - enabled: 1
+    path: Assets/Jiyoon/Scenes/Draw_JYCopy.unity
+    guid: 9f72576c16dcbd04b84de38118ab263e
+  - enabled: 1
+    path: Assets/Jiyoon/Scenes/JY_Map.unity
     guid: 45b874017ded4714083c3e4746a92812
+  - enabled: 1
+    path: Assets/Jiyoon/Scenes/Profile_JYCopy.unity
+    guid: 12abce0d0b7192940a2b85c2e516ed2c
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9ed0b6ce177d7c448a239ae450041506, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 9bc2d099f46da4144b0ba7ea3b07b6d8, type: 2}

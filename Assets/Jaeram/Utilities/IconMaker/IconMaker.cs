@@ -18,10 +18,11 @@ public class IconMaker : MonoBehaviour
     public Camera bakeCam;
     public string spriteName;
     Text pathText;
+    int PNGindex;
     // Start is called before the first frame update
     void Start()
     {
-        pathText = GameObject.Find("PathText").GetComponent<Text>();
+        //pathText = GameObject.Find("PathText").GetComponent<Text>();
         StartCoroutine(GetWritePermission());
     }
 
@@ -107,9 +108,11 @@ public class IconMaker : MonoBehaviour
 
     public void CreateIcon2()
     {
+        string imageName=$"PngImage{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}";
         bakeCam.targetTexture = ren;
 
-       
+
+
         bakeCam.targetTexture.Release();
         RenderTexture.active = bakeCam.targetTexture;
         bakeCam.Render();
@@ -118,8 +121,12 @@ public class IconMaker : MonoBehaviour
         //impPng.ReadPixels(new Rect(0, 0, bakeCam.targetTexture.height, bakeCam.targetTexture.width), 0, 0);
         impPng.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         impPng.Apply();
+        byte[] bytesPng = impPng.EncodeToPNG();
 
+        DBManager.dbManager.SaveImage(bytesPng,imageName);
         NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(impPng, "GalleryTest", "Image.png", (success, path) => Debug.Log("Media save result: " + success + " " + path));
+
+       // PNGindex++;
     }
 }
 

@@ -8,13 +8,13 @@ public class ButtonSystem : MonoBehaviour
     IconMaker iconMaker;
     ScreenShotMaker photoMaker;
     Draw draw;
-    GameObject drawingButton;
+    public GameObject drawingButton;
     public Material drawMat;
     //Text pathText;
     void Start()
     {
         draw = GameObject.Find("Draw").GetComponent<Draw>();
-        drawingButton = GameObject.Find("DrawingButton");
+        //drawingButton = GameObject.Find("DrawingButton");
         iconMaker = GameObject.Find("Holder").GetComponent<IconMaker>();
         photoMaker = GameObject.Find("Holder").GetComponent<ScreenShotMaker>();
         //pathText = GameObject.Find("PathText").GetComponent<Text>();

@@ -44,13 +44,93 @@ namespace ARLocation
         /// </summary>
         /// <value>The horizontal vector.</value>
         public DVector2 HorizontalVector => new DVector2(Latitude, Longitude);
+        
+        /*원래 스크립트
+         public Location(double latitude = 0.0, double longitude = 0.0, double altitude = 0.0)
+         {
+             Latitude = latitude;
+             Longitude = longitude;
+             Altitude = altitude;
+         }
 
-        public Location(double latitude = 0.0, double longitude = 0.0, double altitude = 0.0)
+         /*
+         public으로 입력한 좌표가 아니라 그래피티의 GPS 값을 받아오도록 수정
+         public Location(double latitude= 0.0, double longitude = 0.0, double altitude = 0.0)
+         {
+             //Debug.Assert(ReadPinGPSData._instance.graffitiPos != null, "그래피티 위치값 알 수 없음");-> 안 뜸. 왜?
+             Debug.Assert(ReadPinGPSData._instance.isGraffiDataReady == true, "그래피티 위치값이 아직 수신되지 않음");
+
+             latitude = ReadPinGPSData._instance.graffitiPos.x;
+             longitude = ReadPinGPSData._instance.graffitiPos.y;
+             altitude = ReadPinGPSData._instance.graffitiPos.z;
+         }
+         */
+
+        //ViewSceneAll 스크립트 만든 후 수정
+        public Location(double latitude = 22.0, double longitude = 23.0, double altitude = 24.0) //디폴드 값 (0,0,0)
         {
-            Latitude = latitude;
-            Longitude = longitude;
-            Altitude = altitude;
+            //예외처리!! 일단 ViewSceneAll에서 싱글톤이 생성된 상태와 아직 생성되지 않은 상태를 구분
+            if (LoadLine._instance != null) //싱글톤이 생성되었다면->다시 DB에서 값이 불러와진 경우와 그렇지 않은 경우 구분 
+            {
+                //Debug.Assert(LoadLine._instance == null, "싱글톤은 생성되었고, 그래피티 위치값이 아직 수신되지 않음");
+
+                if (LoadLine._instance.isLineDataReady== true)
+                {
+                    latitude = LoadLine._instance.lineLaFl;
+                    Latitude = latitude;
+                    longitude = LoadLine._instance.lineLoFl;
+                    Longitude = longitude;
+                    altitude = LoadLine._instance.lineAlFl;
+                    Altitude = altitude;
+                }
+                else
+                {
+                    Latitude = latitude;
+                    Longitude = longitude;
+                    Altitude = altitude;
+                }
+            }
+            else //아직 생성되지 않았다면 디폴트 값. 이렇게 원래 스크립트의 디폴트 값을 넣어줘서 예외처리 한다.
+            {
+                Latitude = latitude;
+                Longitude = longitude;
+                Altitude = altitude;
+            }
         }
+        
+        /*
+        //ViewSceneAll 스크립트 만든 후 수정
+        public Location(double latitude = 0.0, double longitude = 0.0, double altitude = 0.0) //디폴드 값 (0,0,0)
+        {
+            //예외처리!! 일단 ViewSceneAll에서 싱글톤이 생성된 상태와 아직 생성되지 않은 상태를 구분
+            if (ViewSceneAll.vsa_instance != null) //싱글톤이 생성되었다면->다시 DB에서 값이 불러와진 경우와 그렇지 않은 경우 구분 
+            {
+                Debug.Assert(ViewSceneAll.vsa_instance.isGraffiDataReady == true, "싱글톤은 생성되었고, 그래피티 위치값이 아직 수신되지 않음");
+
+                if (ViewSceneAll.vsa_instance.isGraffiDataReady)
+                {
+                    latitude = ViewSceneAll.vsa_instance.graffitiPos.x;
+                    Latitude = latitude;
+                    longitude = ViewSceneAll.vsa_instance.graffitiPos.y;
+                    Longitude = longitude;
+                    altitude = ViewSceneAll.vsa_instance.graffitiPos.z;
+                    Altitude = altitude;
+                }
+                else
+                {
+                    Latitude = latitude;
+                    Longitude = longitude;
+                    Altitude = altitude;
+                }
+            }
+            else //아직 생성되지 않았다면 디폴트 값. 이렇게 원래 스크립트의 디폴트 값을 넣어줘서 예외처리 한다.
+            {
+                Latitude = latitude;
+                Longitude = longitude;
+                Altitude = altitude;
+            }
+        }
+        */
 
         /// <summary>
         /// Clones this instance.
